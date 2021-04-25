@@ -7,39 +7,54 @@ function where_or_and($q, $s){
 }
 parse_str($_SERVER['QUERY_STRING'], $output);
 $start = False;
-$query = "SELECT * FROM marks";
+$query = "SELECT * FROM task";
 
 if(isset($output['subject'])){
-  $query .= " WHERE subject=" . "'" . $output['subject'] . "'";
-  $start = True;
-}
-/*if(isset($name)){
-
   $query = where_or_and($query,$start);
-
-  $query .= " name=" . "'" . $name . "'";
-  $start=True;
-}
-if(isset($mark[lt])){
-  $query = where_or_and($query, $start);
-  $query .= " mark <=" . $mark[lt];
+  $query .= " subject=" . "'" . $output['subject'] . "'";
   $start = True;
 }
-if(isset($mark[eq])){
+
+if(isset($output['date']['gt'])){
+  $query = where_or_and($query,$start);
+  $query .= "  date>=" . "'" . $output['date']['gt'] . "'";
+  $start = True;
+}
+
+if(isset($output['date']['eq'])){
+  $query = where_or_and($query,$start);
+  $query .= " date=" . "'" . $output['date']['eq'] . "'";
+  $start = True;
+}
+
+if(isset($output['date']['lt'])){
+  $query = where_or_and($query,$start);
+  $query .= " date<=" . "'" . $output['date']['lt'] . "'";
+  $start = True;
+}
+
+if(isset($output['name'])){
+  $query = where_or_and($query,$start);
+  $query .= " name=" . "'" . $output['name'] . "'";
+  $start = True;
+}
+
+
+if(isset($output['mark'][lt])){
+  $query = where_or_and($query, $start);
+  $query .= " mark <=" . $output['mark'][lt];
+  $start = True;
+}
+if(isset($output['mark'][eq])){
    $query = where_or_and($query, $start);
-   $query .= " mark =" . $mark[eq];
+   $query .= " mark =" . $output['mark'][eq];
    $start = True;
  }
-if(isset($mark[gt])){
+ if(isset($output['mark'][gt])){
    $query = where_or_and($query, $start);
-   $query .= " mark >=" . $mark[gt];
+   $query .= " mark >=" . $output['mark'][gt];
    $start = True;
  }
-*/
-
-
-
-
 
 
 if(isset($limit)){
@@ -51,9 +66,6 @@ if(!$result){
 }
 
 
-
-
-
 while ($row = mysqli_fetch_assoc($result)){
     $data[]=$row;
 }
@@ -61,5 +73,5 @@ while ($row = mysqli_fetch_assoc($result)){
 echo json_encode($data);
 
 
-
 ?>
+
