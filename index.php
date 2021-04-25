@@ -40,19 +40,19 @@ if(isset($output['name'])){
 }
 
 
-if(isset($output['mark'][lt])){
+if(isset($output['mark']['lt'])){
   $query = where_or_and($query, $start);
-  $query .= " mark <=" . $output['mark'][lt];
+  $query .= " mark <=" . $output['mark']['lt'];
   $start = True;
 }
-if(isset($output['mark'][eq])){
+if(isset($output['mark']['eq'])){
    $query = where_or_and($query, $start);
-   $query .= " mark =" . $output['mark'][eq];
+   $query .= " mark =" . $output['mark']['eq'];
    $start = True;
  }
- if(isset($output['mark'][gt])){
+ if(isset($output['mark']['gt'])){
    $query = where_or_and($query, $start);
-   $query .= " mark >=" . $output['mark'][gt];
+   $query .= " mark >=" . $output['mark']['gt'];
    $start = True;
  }
 
