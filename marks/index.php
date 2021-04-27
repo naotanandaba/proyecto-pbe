@@ -39,6 +39,7 @@ if(isset($constraints['mark']['gt'])){
 if(isset($constraints['limit'])){
   $query .= " LIMIT " . $constraints['limit'];
 }
+
 $result = mysqli_query($conn, $query);
 if(!$result){
     die("query failed");

@@ -12,6 +12,11 @@ $query = "SELECT * FROM students";
 
 
 
+
+if(isset($constraints['limit'])){
+  $query .= " LIMIT " . $constraints['limit'];
+}
+
 $result = mysqli_query($conn, $query);
 if(!$result){
     die("query failed");

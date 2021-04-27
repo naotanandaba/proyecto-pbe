@@ -1,36 +1,41 @@
 <?php
-include_once("db.php");
+include_once("/var/www/dominio_pbe/db.php");
 function where_or_and($q, $s){
   $buffer = $s ? " AND" : " WHERE";
   $q .= $buffer;
   return $q;
 }
-parse_str($_SERVER['QUERY_STRING'], $output);
+parse_str($_SERVER['QUERY_STRING'], $constraints);
 $start = False;
 $query = "SELECT * FROM task";
 
-if(isset($output['subject'])){
+if(isset($constraints['subject'])){
   $query = where_or_and($query,$start);
-  $query .= " subject=" . "'" . $output['subject'] . "'";
+  $query .= " subject=" . "'" . $constraints['subject'] . "'";
   $start = True;
 }
 
-if(isset($output['date']['gt'])){
+if(isset($constraints['date']['gt'])){
   $query = where_or_and($query,$start);
-  $query .= "  date>=" . "'" . $output['date']['gt'] . "'";
+  $query .= "  date>=" . "'" . $constraints['date']['gt'] . "'";
   $start = True;
 }
 
-if(isset($output['date']['eq'])){
+if(isset($constraints['date']['eq'])){
   $query = where_or_and($query,$start);
-  $query .= " date=" . "'" . $output['date']['eq'] . "'";
+  $query .= " date=" . "'" . $constraints['date']['eq'] . "'";
   $start = True;
 }
 
-if(isset($output['date']['lt'])){
+if(isset($constraints['date']['lt'])){
   $query = where_or_and($query,$start);
-  $query .= " date<=" . "'" . $output['date']['lt'] . "'";
+  $query .= " date<=" . "'" . $constraints['date']['lt'] . "'";
   $start = True;
+}
+
+
+if(isset($constraints['limit'])){
+  $query .= " LIMIT " . $constraints['limit'];
 }
 
 $result = mysqli_query($conn, $query);
