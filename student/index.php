@@ -11,6 +11,11 @@ $query = "SELECT * FROM students";
 
 
 
+if(isset($constraints['student'])){
+  $query = where_or_and($query, $start);
+  $query .= " student=" . "'" . $constraints['student'] . "'";
+  $start = True;
+
 
 
 if(isset($constraints['limit'])){
