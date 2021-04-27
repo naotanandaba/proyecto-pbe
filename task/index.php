@@ -17,9 +17,9 @@ if(isset($constraints['subject'])){
   $start = True;
 }
 
-if(isset($constraints['date']['gt'])){
+if(isset($constraints['date']['gte'])){
   $query = where_or_and($query, $start);
-  $query .= "  date>=" . "'" . $constraints['date']['gt'] . "'";
+  $query .= "  date>=" . "'" . $constraints['date']['gte'] . "'";
   $start = True;
 }
 
@@ -31,7 +31,7 @@ if(isset($constraints['date']['eq'])){
 
 if(isset($constraints['date']['lt'])){
   $query = where_or_and($query, $start);
-  $query .= " date<=" . "'" . $constraints['date']['lt'] . "'";
+  $query .= " date<" . "'" . $constraints['date']['lt'] . "'";
   $start = True;
 }
 
