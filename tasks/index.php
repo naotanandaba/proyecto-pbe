@@ -27,12 +27,18 @@ if(isset($constraints['date']['gte'])){
 
 if(isset($constraints['date']['eq'])){
   $query = where_or_and($query, $start);
+  if($constraints['date']['gte'] === "now"){
+    $constraints['date']['gte'] = date("Y-m-d");
+  }
   $query .= " date=" . "'" . $constraints['date']['eq'] . "'";
   $start = True;
 }
 
 if(isset($constraints['date']['lt'])){
   $query = where_or_and($query, $start);
+  if($constraints['date']['gte'] === "now"){
+    $constraints['date']['gte'] = date("Y-m-d");
+  }
   $query .= " date<" . "'" . $constraints['date']['lt'] . "'";
   $start = True;
 }
