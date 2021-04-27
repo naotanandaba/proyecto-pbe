@@ -1,5 +1,5 @@
 <?php
-include_once("/var/www/dominio_pbe/db.php");
+include_once('C:\xampp\htdocs\db.php');
 function where_or_and($q, $s){
   $buffer = $s ? " AND" : " WHERE";
   $q .= $buffer;
