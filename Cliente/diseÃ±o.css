@@ -1,0 +1,37 @@
+        window{
+                background-color: #CFC3A4;
+        }
+        button{ 
+                background-color: black;
+                color: white;
+                border-radius: 70%;
+                background: linear-gradient(to bottom, black 100%);
+                border-color: #CFC3A4;
+                border-width: 10px;
+        }
+        button:hover {
+                background-color: #1EC5FF;
+                background: linear-gradient(to bottom, #7F7F7F 5%, #396087 100%)
+        }
+        button:active {
+                background-color: #FFC0CB;
+                background: linear-gradient(to bottom, rgb(0, 119, 255) 5%, #4976A2 100%)
+        }
+        #labelc{
+                background-color: #0000FF;
+                margin: 1px;
+                color: white;
+
+        }
+        #tb{
+                background-color: #1ED6FF;
+                margin: 1px;
+        }
+        #tb1{
+                background-color: #21B4EE;
+                margin: 1px;
+        }
+        #w{
+                color: #A52A2A;
+        }
+
