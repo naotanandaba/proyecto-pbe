@@ -18,12 +18,13 @@ if(isset($constraints['subject'])){
 
 if(isset($constraints['date']['gte'])){
   $query = where_or_and($query, $start);
+  if($constraints['date']['gte'] === "now"){
+    $constraints['date']['gte'] = date("Y-m-d");
+  }
   $query .= "  date>=" . "'" . $constraints['date']['gte'] . "'";
   $start = True;
   
-  /*if(date=now){
-    $now = dateTime();
-  }*/
+  
 
 }
 
