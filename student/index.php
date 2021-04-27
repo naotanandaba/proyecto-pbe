@@ -1,4 +1,4 @@
-?php
+<?php
 include_once("/var/www/dominio_pbe/db.php");
 function where_or_and($q, $s){
   $buffer = $s ? " AND" : " WHERE";
@@ -21,8 +21,6 @@ $result = mysqli_query($conn, $query);
 if(!$result){
     die("query failed");
 }
-
-
 
 
 
