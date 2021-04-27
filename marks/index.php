@@ -9,13 +9,15 @@ parse_str($_SERVER['QUERY_STRING'], $constraints);
 $start = False;
 $query = "SELECT * FROM marks";
 
+
+
 if(isset($constraints['subject'])){
   $query = where_or_and($query, $start);
   $query .= " subject=" . "'" . $constraints['subject'] . "'";
   $start = True;
 }
 if(isset($constraints['name'])){
-  $query = where_or_and($query,$start);
+  $query = where_or_and($query, $start);
   $query .= " name=" . "'" . $constraints['name'] . "'";
   $start = True;
 }
@@ -36,6 +38,7 @@ if(isset($constraints['mark']['gt'])){
  }
 
 
+
 if(isset($constraints['limit'])){
   $query .= " LIMIT " . $constraints['limit'];
 }
@@ -44,9 +47,6 @@ $result = mysqli_query($conn, $query);
 if(!$result){
     die("query failed");
 }
-
-
-
 
 
 while ($row = mysqli_fetch_assoc($result)){
