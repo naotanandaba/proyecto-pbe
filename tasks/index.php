@@ -23,9 +23,6 @@ if(isset($constraints['date']['gte'])){
   }
   $query .= "  date>=" . "'" . $constraints['date']['gte'] . "'";
   $start = True;
-  
-  
-
 }
 
 if(isset($constraints['date']['eq'])){
