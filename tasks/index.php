@@ -5,12 +5,10 @@ function where_or_and($q, $s){
   $q .= $buffer;
   return $q;
 }
-parse_str($_SERVER['QUERY_STRING'], $constraints);
+parse_str(rawurldecode($_SERVER['QUERY_STRING']), $constraints);
 $start = False;
 $query = "SELECT * FROM task";
 
-<?php
-$now->format('Y-m-d');
 
 if(isset($constraints['subject'])){
   $query = where_or_and($query, $start);
