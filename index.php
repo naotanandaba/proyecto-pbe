@@ -33,38 +33,10 @@ if(isset($output['date']['lt'])){
   $start = True;
 }
 
-if(isset($output['name'])){
-  $query = where_or_and($query,$start);
-  $query .= " name=" . "'" . $output['name'] . "'";
-  $start = True;
-}
-
-
-if(isset($output['mark']['lt'])){
-  $query = where_or_and($query, $start);
-  $query .= " mark <=" . $output['mark']['lt'];
-  $start = True;
-}
-if(isset($output['mark']['eq'])){
-   $query = where_or_and($query, $start);
-   $query .= " mark =" . $output['mark']['eq'];
-   $start = True;
- }
- if(isset($output['mark']['gt'])){
-   $query = where_or_and($query, $start);
-   $query .= " mark >=" . $output['mark']['gt'];
-   $start = True;
- }
-
-
-if(isset($limit)){
-  $query .= " LIMIT " . $limit;
-}
 $result = mysqli_query($conn, $query);
 if(!$result){
     die("query failed");
 }
-
 
 while ($row = mysqli_fetch_assoc($result)){
     $data[]=$row;
