@@ -9,7 +9,8 @@ parse_str($_SERVER['QUERY_STRING'], $constraints);
 $start = False;
 $query = "SELECT * FROM task";
 
-
+<?php
+$now->format('Y-m-d');
 
 if(isset($constraints['subject'])){
   $query = where_or_and($query, $start);
@@ -21,6 +22,11 @@ if(isset($constraints['date']['gte'])){
   $query = where_or_and($query, $start);
   $query .= "  date>=" . "'" . $constraints['date']['gte'] . "'";
   $start = True;
+  
+  /*if(date=now){
+    $now = dateTime();
+  }*/
+
 }
 
 if(isset($constraints['date']['eq'])){
