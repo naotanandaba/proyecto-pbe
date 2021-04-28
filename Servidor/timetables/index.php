@@ -5,52 +5,105 @@ function where_or_and($q, $s){
     $q .= $buffer;
     return $q;
 }
-parse_str(rawurldecode($_SERVER['QUERY_STRING']), $constraints);
+parse_str(rawurldecode($_SERVER['QUERY_STRING']), $cons);
 $start = False;
-$query = "SELECT * FROM marks";
+$query = "SELECT * FROM timetables";
+$date = new DateTime();
 
-if(isset($constraints['subject'])){
+if(isset($cons['subject'])){
     $query = where_or_and($query, $start);
-    $query .= " subject=" . "'" . $constraints['subject'] . "'";
+    $query .= " subject=" . "'" . $cons['subject'] . "'";
     $start = True;
 }
-if(isset($constraints['name'])){
-    $query = where_or_and($query,$start);
-    $query .= " name=" . "'" . $constraints['name'] . "'";
+if(isset($cons['room'])){
+    $query = where_or_and($query, $start);
+    $query .= " room=" . "'" . $cons['room'] . "'";
+    $start=True;
+}
+if(isset($cons['hour']['lt'])){
+    $query = where_or_and($query, $start);
+    $query .= " hour < ";
+    if($cons['hour']['lt'] === "now"){
+        $query .= $date->format('His') ;
+    }
+    else {
+        $query .= $cons['hour']['lt'];
+    }
+    $start = True;
+
+}
+if(isset($cons['hour']['eq'])){
+    $query = where_or_and($query, $start);
+    $query .= " hour = ";
+    if($cons['hour']['eq'] === "now"){
+        $query .= $date->format('His') ;
+    }
+    else {
+        $query .= $cons['hour']['eq'];
+    }
     $start = True;
 }
-if(isset($constraints['mark']['lt'])){
+if(isset($cons['hour']['gt'])){
     $query = where_or_and($query, $start);
-    $query .= " mark <" . $constraints['mark']['lt'];
+    $query .= " hour > ";
+    if($cons['hour']['gt'] === "now"){
+        $query .= $date->format('His') ;
+    }
+    else {
+        $query .= $cons['hour']['gt'];
+    }
     $start = True;
 }
-if(isset($constraints['mark']['eq'])){
+if(isset($cons['day']['gte'])){
     $query = where_or_and($query, $start);
-    $query .= " mark =" . $constraints['mark']['eq'];
+    $query .= " day >=";
+    if($cons['day']['gte'] === "now") {
+         $query .= "'" . $date->format('D') . "'";
+    } else {
+        $query .= "'" . $cons['day']['gte'] . "'";
+    }
     $start = True;
 }
-if(isset($constraints['mark']['gt'])){
+if(isset($cons['day']['eq'])){
     $query = where_or_and($query, $start);
-    $query .= " mark >" . $constraints['mark']['gt'];
+    $query .= " day =";
+    if($cons['day']['eq'] === "now") {
+        $query .= "'" . $date->format('D') . "'";
+    } else {
+        $query .= "'" . $cons['day']['eq'] . "'";
+    }
+    $start = True;
+}
+if(isset($cons['day']['lte'])){
+    $query = where_or_and($query, $start);
+    $query .= " day <=";
+    if($cons['day']['lte'] === "now") {
+        $query .= "'" . $date->format('D') . "'";
+    } else {
+        $query .= "'" . $cons['day']['lte'] . "'";
+    }
+    $start = True;
+}
+
+if(isset($cons['limit'])){
+    $query .= " LIMIT " . $cons['limit'];
     $start = True;
 }
 
 
-if(isset($constraints['limit'])){
-    $query .= " LIMIT " . $constraints['limit'];
-}
+$query .= ";";
 $result = mysqli_query($conn, $query);
 if(!$result){
     die("query failed");
 }
 
 
-$data=array();
 
-while ($row = mysqli_fetch_assoc($result)){
+
+$data=array();
+while($row = mysqli_fetch_assoc($result)){
     $data[]=$row;
 }
 
 echo json_encode($data);
-
-mysqli_close($conn);
+$conn->close();
