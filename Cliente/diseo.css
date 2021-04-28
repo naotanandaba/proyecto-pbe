@@ -1,0 +1,44 @@
+        window{
+                color:#fff;
+                background-color: #5b5f61;
+        }
+        button{ 
+                background-color: black;
+                color: rgb(255, 255, 255);
+                border-radius: 10px;
+                background: linear-gradient(to bottom, #000000, #0084ff);
+                border-color: #055597;
+                border-width: 10px;
+                border: 1px solid rgb(114, 119, 114);
+        }
+        button:hover {
+                background-color: #055597;
+                color: rgb(255, 255, 255);
+                background: linear-gradient(to bottom, #1b8cf7 5%, #000000 100%)
+        }
+        button:active {
+                background-color: #055597;
+                color: rgb(255, 255, 255);
+                background: linear-gradient(to bottom, rgb(255, 45, 45) 5%, #ffffff 100%)
+        }
+        #labelc{
+                background-color: #0000a8;
+                margin: 1px;
+                color: rgb(255, 255, 255);
+
+        }
+        #tb{
+                background-color: #1ED6FF;
+                color: black;
+                margin: 1px;
+        }
+        #tb1{
+                background-color: #21B4EE;
+                color: black;
+                margin: 1px;
+        }
+
+        span {
+                color: blue;
+                font-weight: bold;
+            }
