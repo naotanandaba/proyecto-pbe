@@ -90,7 +90,7 @@ if(isset($cons['limit'])){
     $start = True;
 }
 
-
+$query .= " ORDER BY date";
 $query .= ";";
 $result = mysqli_query($conn, $query);
 if(!$result){
