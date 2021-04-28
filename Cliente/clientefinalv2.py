@@ -36,7 +36,7 @@ class Cliente(Gtk.Window):
         self.labelInicial=Gtk.Label()
         self.labelInicial.set_text(login_text)
         if is_LCD_conected == True :
-            lcd.nombre(login_text)
+            lcd.inicio(login_text)
         
         self.box1.pack_start(self.labelInicial,False,True,0)
         self.box1.set_homogeneous(True)
