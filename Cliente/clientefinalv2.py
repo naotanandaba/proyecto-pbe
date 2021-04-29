@@ -111,7 +111,8 @@ class Cliente(Gtk.Window):
         for i in range(len(self.bbdd[id_clave])):
             self.labelFor=Gtk.Label()
             self.labelFor.set_text(self.bbdd[id_clave][i])
-            self.table.attach(self.labelFor,i,i+1,0,1)       
+            self.table.attach(self.labelFor,i,i+1,0,1)
+            self.labelFor.set_name("labelc")
         
         for i in range(len(data_json)):
             for j in range(len(self.bbdd[id_clave])):
