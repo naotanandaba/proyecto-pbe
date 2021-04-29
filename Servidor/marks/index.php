@@ -40,7 +40,6 @@ if(isset($constraints['limit'])){
     $query .= " LIMIT " . $constraints['limit'];
 }
 
-$query .= " ORDER BY date";
 
 $result = mysqli_query($conn, $query);
 if(!$result){
